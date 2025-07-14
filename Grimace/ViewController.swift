@@ -28,6 +28,12 @@ class ViewController: NSViewController {
         self.refreshView()
     }
     
+    override func viewWillAppear() {
+        super.viewWillAppear()
+        
+        self.view.window?.isMovableByWindowBackground = true
+    }
+    
     func tryWithError(_ block:() throws -> (), ignoreBlock: ((_ error: Error)->Bool)? = nil) {
         do {
             try block()
