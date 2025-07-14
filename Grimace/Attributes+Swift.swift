@@ -50,6 +50,8 @@ extension Attributes {
         
         let newAttribute = try finderInfoAttributeToShowIcon(withExistingFinderInfoAttribute: existingAttribute!)
         
-        try setData(newAttribute, forAttribute: kAttributeFinderInfo, for: url)
+        if existingAttribute != newAttribute {
+            try setData(newAttribute, forAttribute: kAttributeFinderInfo, for: url)
+        }
     }
 }

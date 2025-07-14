@@ -21,7 +21,6 @@ const NSString *kAttributeFolderIcon = @"com.apple.icon.folder#S";
 const NSString *kAttributeFinderInfo = @"com.apple.FinderInfo";
 const NSString *kAttributeUserTags = @"com.apple.metadata:_kMDItemUserTags";
 
-static const char kDefaultFinderInfo[32] = { 0, 0, 0, 0, 0, 0, 0, 0, 4, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0 };
 static NSString *kAttributeFolderIconSymbolFormat = @"{\"sym\":\"%@\"}";
 static NSString *kAttributeFolderIconEmojiFormat = @"{\"emoji\":\"%@\"}";
 
@@ -172,9 +171,6 @@ static NSString *kAttributeFolderIconEmojiFormat = @"{\"emoji\":\"%@\"}";
     
     return YES;
 }
-
-//int success = setxattr(url.path.UTF8String, kAttributeFinderInfo.UTF8String, kDefaultFinderInfo, 32, 0, 0);
-//success = setxattr(url.path.UTF8String, kAttributeFolderIcon.UTF8String, formattedSymbolName.UTF8String, formattedSymbolName.length, 0, 0);
 
 + (NSData *)folderIconAttributeWithSymbolName:(NSString *)symbolName {
     return [[NSString stringWithFormat:kAttributeFolderIconSymbolFormat, symbolName] dataUsingEncoding:NSUTF8StringEncoding];
