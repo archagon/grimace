@@ -58,7 +58,13 @@ class ViewController: NSViewController {
                     if dataDescription.length == 0 || dataDescription.character(at: 0) == 0 {
                         dataDescription = ((data as NSData).debugDescription as NSString)
                     }
+                    
                     print("Data for \(attribute): \(dataDescription)")
+                    
+                    let alert = NSAlert()
+                    alert.messageText = "\(attribute)"
+                    alert.informativeText = "\(dataDescription)"
+                    alert.runModal()
                 }
             } ignoreBlock: { error in
                 if (error as NSError).domain == NSPOSIXErrorDomain && (error as NSError).code == ENOATTR {
