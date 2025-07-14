@@ -10,8 +10,7 @@ internal import UniformTypeIdentifiers
 
 class ViewController: NSViewController {
 
-    @IBOutlet var dropTarget: DragDroppableView!
-    @IBOutlet var imageWell: NSImageView!
+    @IBOutlet var pathControl: NSPathControl!
     @IBOutlet var textField: NSTextField!
     @IBOutlet var picker: NSPopUpButton!
     @IBOutlet var listButton: NSButton!
@@ -19,9 +18,7 @@ class ViewController: NSViewController {
     @IBOutlet var clearButton: NSButton!
     
     var selectedDirectory: URL? {
-        didSet {
-            refreshView()
-        }
+        return self.pathControl.url
     }
     
     override func viewDidLoad() {
@@ -39,6 +36,10 @@ class ViewController: NSViewController {
                 NSAlert(error: error).runModal()
             }
         }
+    }
+    
+    @IBAction func didPickDirectory(_: NSPathControl) {
+        refreshView()
     }
     
     @IBAction func didClickList(_: NSButton?) {
@@ -85,64 +86,20 @@ class ViewController: NSViewController {
     }
     
     func refreshView() {
+        #if DEBUG
+        self.listButton.isHidden = false
+        #else
+        self.listButton.isHidden = true
+        #endif
         
-        if let directory = self.selectedDirectory {
+        if let directory = self.selectedDirectory, directory != URL.init(filePath: "/") {
             self.listButton.isEnabled = true
             self.applyButton.isEnabled = true
             self.clearButton.isEnabled = true
-            
-            let icon = NSWorkspace.shared.icon(forFile: directory.path())
-            self.imageWell.image = icon
-            self.imageWell.image = NSWorkspace.shared.icon(for: .folder)
         } else {
             self.listButton.isEnabled = false
             self.applyButton.isEnabled = false
             self.clearButton.isEnabled = false
-            
-            self.imageWell.image = nil
         }
     }
-}
-
-extension ViewController: DraggityDropDestination {
-    
-    func dropperShouldBegin(_ dropper: NSView) -> Bool {
-        return true
-    }
-    
-    func dropperSupportedFiletypes(_ dropper: NSView) -> [NSPasteboard.PasteboardType] {
-        return [.fileURL]
-    }
-    
-    func dropperDraggingEntered(_ dropper: NSView) {
-        print("Entered!")
-    }
-    
-    func dropperDraggingExited(_ dropper: NSView) {
-        print("Exited!")
-    }
-    
-    func dropperDraggingEnded(_ dropper: NSView) {
-        print("Ended!")
-    }
-    
-    func dropperDidGetFiles(_ dropper: NSView, files: [URL]) -> Bool {
-        print("Got: \(files)")
-        
-        if files.count == 1 {
-            let url = files.first!
-            
-            if url.hasDirectoryPath {
-                self.selectedDirectory = files.first
-                return true
-            } else {
-                print("Wrong type")
-                return false
-            }
-        } else {
-            print("Wrong file count")
-            return false
-        }
-    }
-    
 }
