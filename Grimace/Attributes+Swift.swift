@@ -39,16 +39,13 @@ extension Attributes {
             existingAttribute = try data(forAttribute: kAttributeFinderInfo, for: url)
         } catch {
             if (error as NSError).domain == NSPOSIXErrorDomain && (error as NSError).code == ENOATTR {
+                // continue
             } else {
                 throw error
             }
         }
         
-        if existingAttribute == nil {
-            existingAttribute = Data([UInt8](repeating: 0, count: 32))
-        }
-        
-        let newAttribute = try finderInfoAttributeToShowIcon(withExistingFinderInfoAttribute: existingAttribute!)
+        let newAttribute = try finderInfoAttributeToShowIcon(withExistingFinderInfoAttribute: existingAttribute ?? Data(count: 32))
         
         if existingAttribute != newAttribute {
             try setData(newAttribute, forAttribute: kAttributeFinderInfo, for: url)

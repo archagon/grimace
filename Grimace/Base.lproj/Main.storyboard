@@ -72,7 +72,7 @@
             <objects>
                 <windowController showSeguePresentationStyle="single" id="B8D-0N-5wS" sceneMemberID="viewController">
                     <window key="window" title="Grimace" allowsToolTipsWhenApplicationIsInactive="NO" autorecalculatesKeyViewLoop="NO" restorable="NO" releasedWhenClosed="NO" visibleAtLaunch="NO" animationBehavior="default" id="IQv-IB-iLA">
-                        <windowStyleMask key="styleMask" titled="YES" closable="YES" miniaturizable="YES" resizable="YES"/>
+                        <windowStyleMask key="styleMask" titled="YES" closable="YES" miniaturizable="YES"/>
                         <windowPositionMask key="initialPositionMask" leftStrut="YES" rightStrut="YES" topStrut="YES" bottomStrut="YES"/>
                         <rect key="contentRect" x="196" y="240" width="480" height="270"/>
                         <rect key="screenRect" x="0.0" y="0.0" width="1680" height="1027"/>
@@ -93,25 +93,36 @@
             <objects>
                 <viewController id="XfG-lQ-9wD" customClass="ViewController" customModule="Grimace" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" id="m2S-Jp-Qdl">
-                        <rect key="frame" x="0.0" y="0.0" width="568" height="163"/>
+                        <rect key="frame" x="0.0" y="0.0" width="582" height="144"/>
                         <autoresizingMask key="autoresizingMask"/>
                         <subviews>
-                            <stackView distribution="fillProportionally" orientation="vertical" alignment="leading" spacing="16" horizontalStackHuggingPriority="249.99998474121094" verticalStackHuggingPriority="249.99998474121094" detachesHiddenViews="YES" translatesAutoresizingMaskIntoConstraints="NO" id="rFX-Nx-Jf0">
-                                <rect key="frame" x="20" y="20" width="528" height="123"/>
+                            <stackView distribution="fillProportionally" orientation="vertical" alignment="leading" spacing="16" horizontalStackHuggingPriority="249.99998474121094" verticalStackHuggingPriority="950" detachesHiddenViews="YES" translatesAutoresizingMaskIntoConstraints="NO" id="rFX-Nx-Jf0">
+                                <rect key="frame" x="20" y="20" width="542" height="104"/>
                                 <subviews>
-                                    <stackView distribution="fill" orientation="horizontal" alignment="centerY" horizontalStackHuggingPriority="249.99998474121094" verticalStackHuggingPriority="249.99998474121094" detachesHiddenViews="YES" translatesAutoresizingMaskIntoConstraints="NO" id="0AX-eP-i23">
-                                        <rect key="frame" x="0.0" y="93" width="528" height="30"/>
+                                    <stackView distribution="fill" orientation="horizontal" alignment="centerY" horizontalStackHuggingPriority="249.99998474121094" verticalStackHuggingPriority="900" detachesHiddenViews="YES" translatesAutoresizingMaskIntoConstraints="NO" id="0AX-eP-i23">
+                                        <rect key="frame" x="0.0" y="80" width="542" height="24"/>
                                         <subviews>
-                                            <textField focusRingType="none" horizontalHuggingPriority="251" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="pgh-uj-79u">
-                                                <rect key="frame" x="-2" y="7" width="139" height="16"/>
-                                                <textFieldCell key="cell" lineBreakMode="clipping" title="1. Drag directory here:" id="Bla-Af-jwY">
-                                                    <font key="font" usesAppearanceFont="YES"/>
-                                                    <color key="textColor" name="labelColor" catalog="System" colorSpace="catalog"/>
-                                                    <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
-                                                </textFieldCell>
-                                            </textField>
+                                            <customView translatesAutoresizingMaskIntoConstraints="NO" id="acL-ht-XAF">
+                                                <rect key="frame" x="0.0" y="0.0" width="404" height="24"/>
+                                                <subviews>
+                                                    <textField focusRingType="none" horizontalHuggingPriority="251" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="pgh-uj-79u">
+                                                        <rect key="frame" x="-2" y="4" width="408" height="16"/>
+                                                        <textFieldCell key="cell" lineBreakMode="clipping" title="1. Drag directory here:" id="Bla-Af-jwY">
+                                                            <font key="font" usesAppearanceFont="YES"/>
+                                                            <color key="textColor" name="labelColor" catalog="System" colorSpace="catalog"/>
+                                                            <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
+                                                        </textFieldCell>
+                                                    </textField>
+                                                </subviews>
+                                                <constraints>
+                                                    <constraint firstItem="pgh-uj-79u" firstAttribute="centerY" secondItem="acL-ht-XAF" secondAttribute="centerY" id="30K-kV-rCa"/>
+                                                    <constraint firstItem="pgh-uj-79u" firstAttribute="leading" secondItem="acL-ht-XAF" secondAttribute="leading" id="BHe-rm-boA"/>
+                                                    <constraint firstItem="pgh-uj-79u" firstAttribute="width" secondItem="acL-ht-XAF" secondAttribute="width" id="Gtu-Pf-xW1"/>
+                                                    <constraint firstAttribute="trailing" secondItem="pgh-uj-79u" secondAttribute="trailing" id="z2J-Ko-cUC"/>
+                                                </constraints>
+                                            </customView>
                                             <pathControl verticalHuggingPriority="750" horizontalCompressionResistancePriority="500" allowsExpansionToolTips="YES" translatesAutoresizingMaskIntoConstraints="NO" id="vBL-j3-uZg">
-                                                <rect key="frame" x="143" y="4" width="385" height="22"/>
+                                                <rect key="frame" x="412" y="0.0" width="130" height="24"/>
                                                 <pathCell key="cell" selectable="YES" editable="YES" alignment="left" placeholderString="" id="Ygg-it-uNI">
                                                     <font key="font" metaFont="system"/>
                                                     <url key="url" string="file:///"/>
@@ -133,19 +144,30 @@
                                             <real value="3.4028234663852886e+38"/>
                                         </customSpacing>
                                     </stackView>
-                                    <stackView distribution="fill" orientation="horizontal" alignment="centerY" horizontalStackHuggingPriority="249.99998474121094" verticalStackHuggingPriority="249.99998474121094" detachesHiddenViews="YES" translatesAutoresizingMaskIntoConstraints="NO" id="KoG-0q-I85">
-                                        <rect key="frame" x="0.0" y="46" width="467" height="31"/>
+                                    <stackView distribution="fill" orientation="horizontal" alignment="centerY" horizontalStackHuggingPriority="249.99998474121094" verticalStackHuggingPriority="900" detachesHiddenViews="YES" translatesAutoresizingMaskIntoConstraints="NO" id="KoG-0q-I85">
+                                        <rect key="frame" x="0.0" y="40" width="480" height="24"/>
                                         <subviews>
-                                            <textField focusRingType="none" horizontalHuggingPriority="251" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="0Ce-AE-Msp">
-                                                <rect key="frame" x="-2" y="8" width="134" height="16"/>
-                                                <textFieldCell key="cell" lineBreakMode="clipping" title="2. Set appearance to:" id="Qu3-IB-SCT">
-                                                    <font key="font" usesAppearanceFont="YES"/>
-                                                    <color key="textColor" name="labelColor" catalog="System" colorSpace="catalog"/>
-                                                    <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
-                                                </textFieldCell>
-                                            </textField>
+                                            <customView translatesAutoresizingMaskIntoConstraints="NO" id="Otp-m9-7NP">
+                                                <rect key="frame" x="0.0" y="0.0" width="130" height="24"/>
+                                                <subviews>
+                                                    <textField focusRingType="none" horizontalHuggingPriority="251" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="0Ce-AE-Msp">
+                                                        <rect key="frame" x="-2" y="4" width="134" height="16"/>
+                                                        <textFieldCell key="cell" lineBreakMode="clipping" title="2. Set appearance to:" id="Qu3-IB-SCT">
+                                                            <font key="font" usesAppearanceFont="YES"/>
+                                                            <color key="textColor" name="labelColor" catalog="System" colorSpace="catalog"/>
+                                                            <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
+                                                        </textFieldCell>
+                                                    </textField>
+                                                </subviews>
+                                                <constraints>
+                                                    <constraint firstItem="0Ce-AE-Msp" firstAttribute="centerY" secondItem="Otp-m9-7NP" secondAttribute="centerY" id="H4q-Yd-2a0"/>
+                                                    <constraint firstItem="0Ce-AE-Msp" firstAttribute="width" secondItem="Otp-m9-7NP" secondAttribute="width" id="NU1-2R-DN5"/>
+                                                    <constraint firstItem="0Ce-AE-Msp" firstAttribute="leading" secondItem="Otp-m9-7NP" secondAttribute="leading" id="d2a-Re-mSP"/>
+                                                    <constraint firstAttribute="trailing" secondItem="0Ce-AE-Msp" secondAttribute="trailing" id="t9X-ru-Yp0"/>
+                                                </constraints>
+                                            </customView>
                                             <textField focusRingType="none" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="bMy-Wh-aha">
-                                                <rect key="frame" x="138" y="4" width="150" height="24"/>
+                                                <rect key="frame" x="138" y="0.0" width="150" height="24"/>
                                                 <constraints>
                                                     <constraint firstAttribute="width" relation="greaterThanOrEqual" constant="150" id="qWg-4l-wxa"/>
                                                 </constraints>
@@ -155,16 +177,27 @@
                                                     <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
                                                 </textFieldCell>
                                             </textField>
-                                            <textField focusRingType="none" horizontalHuggingPriority="251" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="aOX-hC-AEM">
-                                                <rect key="frame" x="294" y="8" width="41" height="16"/>
-                                                <textFieldCell key="cell" lineBreakMode="clipping" title="using:" id="V5N-p2-Ops">
-                                                    <font key="font" metaFont="system"/>
-                                                    <color key="textColor" name="labelColor" catalog="System" colorSpace="catalog"/>
-                                                    <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
-                                                </textFieldCell>
-                                            </textField>
+                                            <customView translatesAutoresizingMaskIntoConstraints="NO" id="xA4-cp-gad">
+                                                <rect key="frame" x="296" y="0.0" width="50" height="24"/>
+                                                <subviews>
+                                                    <textField focusRingType="none" horizontalHuggingPriority="251" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="aOX-hC-AEM">
+                                                        <rect key="frame" x="-2" y="4" width="54" height="16"/>
+                                                        <textFieldCell key="cell" lineBreakMode="clipping" title="using:" id="V5N-p2-Ops">
+                                                            <font key="font" metaFont="system"/>
+                                                            <color key="textColor" name="labelColor" catalog="System" colorSpace="catalog"/>
+                                                            <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
+                                                        </textFieldCell>
+                                                    </textField>
+                                                </subviews>
+                                                <constraints>
+                                                    <constraint firstItem="aOX-hC-AEM" firstAttribute="width" secondItem="xA4-cp-gad" secondAttribute="width" id="MKm-iA-oyc"/>
+                                                    <constraint firstAttribute="trailing" secondItem="aOX-hC-AEM" secondAttribute="trailing" id="gBw-RK-lbK"/>
+                                                    <constraint firstItem="aOX-hC-AEM" firstAttribute="leading" secondItem="xA4-cp-gad" secondAttribute="leading" id="ltn-H5-dIQ"/>
+                                                    <constraint firstItem="aOX-hC-AEM" firstAttribute="centerY" secondItem="xA4-cp-gad" secondAttribute="centerY" id="mYx-sA-PPE"/>
+                                                </constraints>
+                                            </customView>
                                             <popUpButton verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="HW0-rs-dQy">
-                                                <rect key="frame" x="341" y="4" width="126" height="24"/>
+                                                <rect key="frame" x="354" y="0.0" width="126" height="24"/>
                                                 <popUpButtonCell key="cell" type="push" title="symbol name" bezelStyle="rounded" alignment="left" lineBreakMode="truncatingTail" state="on" borderStyle="borderAndBezel" tag="1" imageScaling="proportionallyDown" inset="2" selectedItem="XZM-uI-QdT" id="haZ-VY-97A">
                                                     <behavior key="behavior" lightByBackground="YES" lightByGray="YES"/>
                                                     <font key="font" metaFont="message"/>
@@ -190,19 +223,30 @@
                                             <real value="3.4028234663852886e+38"/>
                                         </customSpacing>
                                     </stackView>
-                                    <stackView distribution="fill" orientation="horizontal" alignment="centerY" horizontalStackHuggingPriority="249.99998474121094" verticalStackHuggingPriority="249.99998474121094" detachesHiddenViews="YES" translatesAutoresizingMaskIntoConstraints="NO" id="G8I-Rq-elo">
-                                        <rect key="frame" x="0.0" y="0.0" width="371" height="30"/>
+                                    <stackView distribution="fill" orientation="horizontal" alignment="centerY" horizontalStackHuggingPriority="249.99998474121094" verticalStackHuggingPriority="900" detachesHiddenViews="YES" translatesAutoresizingMaskIntoConstraints="NO" id="G8I-Rq-elo">
+                                        <rect key="frame" x="0.0" y="0.0" width="371" height="24"/>
                                         <subviews>
-                                            <textField focusRingType="none" horizontalHuggingPriority="251" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="2YE-oc-4qe" userLabel="3. Change attributes:">
-                                                <rect key="frame" x="-2" y="7" width="190" height="16"/>
-                                                <textFieldCell key="cell" lineBreakMode="clipping" title="3. Change directory attributes:" id="xDG-Lu-9wO">
-                                                    <font key="font" usesAppearanceFont="YES"/>
-                                                    <color key="textColor" name="labelColor" catalog="System" colorSpace="catalog"/>
-                                                    <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
-                                                </textFieldCell>
-                                            </textField>
+                                            <customView translatesAutoresizingMaskIntoConstraints="NO" id="fV7-Jd-KDA">
+                                                <rect key="frame" x="0.0" y="0.0" width="186" height="24"/>
+                                                <subviews>
+                                                    <textField focusRingType="none" horizontalHuggingPriority="251" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="2YE-oc-4qe" userLabel="3. Change attributes:">
+                                                        <rect key="frame" x="-2" y="4" width="190" height="16"/>
+                                                        <textFieldCell key="cell" lineBreakMode="clipping" title="3. Change directory attributes:" id="xDG-Lu-9wO">
+                                                            <font key="font" usesAppearanceFont="YES"/>
+                                                            <color key="textColor" name="labelColor" catalog="System" colorSpace="catalog"/>
+                                                            <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
+                                                        </textFieldCell>
+                                                    </textField>
+                                                </subviews>
+                                                <constraints>
+                                                    <constraint firstItem="2YE-oc-4qe" firstAttribute="centerY" secondItem="fV7-Jd-KDA" secondAttribute="centerY" id="6Mi-5k-Zb4"/>
+                                                    <constraint firstAttribute="trailing" secondItem="2YE-oc-4qe" secondAttribute="trailing" id="Uk8-rn-PXv"/>
+                                                    <constraint firstItem="2YE-oc-4qe" firstAttribute="leading" secondItem="fV7-Jd-KDA" secondAttribute="leading" id="kit-Bc-56o"/>
+                                                    <constraint firstItem="2YE-oc-4qe" firstAttribute="width" secondItem="fV7-Jd-KDA" secondAttribute="width" id="ze2-0l-PC6"/>
+                                                </constraints>
+                                            </customView>
                                             <button verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="N2T-XD-exE">
-                                                <rect key="frame" x="194" y="3" width="46" height="24"/>
+                                                <rect key="frame" x="194" y="0.0" width="46" height="24"/>
                                                 <buttonCell key="cell" type="push" title="List" bezelStyle="rounded" alignment="center" borderStyle="border" imageScaling="proportionallyDown" inset="2" id="H3R-cz-rx3">
                                                     <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
                                                     <font key="font" metaFont="system"/>
@@ -212,7 +256,7 @@
                                                 </connections>
                                             </button>
                                             <button verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="6Mi-HG-O2z">
-                                                <rect key="frame" x="248" y="3" width="59" height="24"/>
+                                                <rect key="frame" x="248" y="0.0" width="59" height="24"/>
                                                 <buttonCell key="cell" type="push" title="Apply" bezelStyle="rounded" alignment="center" borderStyle="border" imageScaling="proportionallyDown" inset="2" id="QuN-9y-F0p">
                                                     <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
                                                     <font key="font" metaFont="system"/>
@@ -222,7 +266,7 @@
                                                 </connections>
                                             </button>
                                             <button verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="LMm-4L-BVj">
-                                                <rect key="frame" x="315" y="3" width="56" height="24"/>
+                                                <rect key="frame" x="315" y="0.0" width="56" height="24"/>
                                                 <buttonCell key="cell" type="push" title="Clear" bezelStyle="rounded" alignment="center" borderStyle="border" imageScaling="proportionallyDown" inset="2" id="1kj-Q1-Tci">
                                                     <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
                                                     <font key="font" metaFont="system"/>
@@ -267,7 +311,7 @@
                             <constraint firstItem="rFX-Nx-Jf0" firstAttribute="leading" secondItem="m2S-Jp-Qdl" secondAttribute="leading" constant="20" symbolic="YES" id="ChF-dv-DT5"/>
                             <constraint firstAttribute="trailing" secondItem="rFX-Nx-Jf0" secondAttribute="trailing" constant="20" symbolic="YES" id="PDe-xh-P77"/>
                             <constraint firstItem="rFX-Nx-Jf0" firstAttribute="top" secondItem="m2S-Jp-Qdl" secondAttribute="top" constant="20" symbolic="YES" id="auH-Oj-8Ss"/>
-                            <constraint firstAttribute="bottom" secondItem="rFX-Nx-Jf0" secondAttribute="bottom" constant="20" symbolic="YES" id="cZy-SO-d0G"/>
+                            <constraint firstAttribute="bottom" secondItem="rFX-Nx-Jf0" secondAttribute="bottom" constant="20" symbolic="YES" id="sMB-WG-CC7"/>
                         </constraints>
                     </view>
                     <connections>
@@ -281,7 +325,7 @@
                 </viewController>
                 <customObject id="rPt-NT-nkU" userLabel="First Responder" customClass="NSResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-58" y="670"/>
+            <point key="canvasLocation" x="-108" y="730"/>
         </scene>
     </scenes>
 </document>

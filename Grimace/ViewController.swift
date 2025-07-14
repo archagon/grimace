@@ -68,7 +68,6 @@ class ViewController: NSViewController {
                 }
             } ignoreBlock: { error in
                 if (error as NSError).domain == NSPOSIXErrorDomain && (error as NSError).code == ENOATTR {
-                    print("Attribute not found, skipping...")
                     return true
                 } else {
                     return false
