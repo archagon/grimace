@@ -6,11 +6,14 @@
 //
 
 import Cocoa
+internal import UniformTypeIdentifiers
 
 class ViewController: NSViewController {
 
     @IBOutlet var dropTarget: DragDroppableView!
+    @IBOutlet var imageWell: NSImageView!
     @IBOutlet var textField: NSTextField!
+    @IBOutlet var picker: NSPopUpButton!
     @IBOutlet var listButton: NSButton!
     @IBOutlet var applyButton: NSButton!
     @IBOutlet var clearButton: NSButton!
@@ -64,7 +67,11 @@ class ViewController: NSViewController {
     @IBAction func didClickApply(_: NSButton?) {
         if let directory = self.selectedDirectory {
             tryWithError {
-                try Attributes.setSymbolIcon(with: self.textField.stringValue, for: directory)
+                if self.picker.selectedTag() == 1 {
+                    try Attributes.setSymbolIcon(with: self.textField.stringValue, for: directory)
+                } else if self.picker.selectedTag() == 2 {
+                    try Attributes.setTextIcon(with: self.textField.stringValue, for: directory)
+                }
             }
         }
     }
@@ -84,14 +91,20 @@ class ViewController: NSViewController {
         self.dropTarget.layer?.backgroundColor = NSColor.systemGray.cgColor
         self.dropTarget.clipsToBounds = true
         
-        if self.selectedDirectory != nil {
+        if let directory = self.selectedDirectory {
             self.listButton.isEnabled = true
             self.applyButton.isEnabled = true
             self.clearButton.isEnabled = true
+            
+            let icon = NSWorkspace.shared.icon(forFile: directory.path())
+            self.imageWell.image = icon
+            self.imageWell.image = NSWorkspace.shared.icon(for: .folder)
         } else {
             self.listButton.isEnabled = false
             self.applyButton.isEnabled = false
             self.clearButton.isEnabled = false
+            
+            self.imageWell.image = nil
         }
     }
 }
