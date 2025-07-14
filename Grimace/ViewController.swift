@@ -85,11 +85,6 @@ class ViewController: NSViewController {
     }
     
     func refreshView() {
-        self.dropTarget.wantsLayer = true
-        self.dropTarget.layer?.cornerRadius = 8
-        self.dropTarget.layer?.borderWidth = 1
-        self.dropTarget.layer?.backgroundColor = NSColor.systemGray.cgColor
-        self.dropTarget.clipsToBounds = true
         
         if let directory = self.selectedDirectory {
             self.listButton.isEnabled = true
