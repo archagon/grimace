@@ -306,8 +306,20 @@
                                     <real value="3.4028234663852886e+38"/>
                                 </customSpacing>
                             </stackView>
+                            <button verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="w6a-5H-whc">
+                                <rect key="frame" x="546" y="6" width="29" height="23"/>
+                                <buttonCell key="cell" type="roundTextured" bezelStyle="texturedRounded" image="cup.and.heat.waves.fill" catalog="system" imagePosition="only" alignment="center" borderStyle="border" imageScaling="proportionallyDown" inset="2" id="Aie-bv-opE">
+                                    <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
+                                    <font key="font" metaFont="system"/>
+                                </buttonCell>
+                                <connections>
+                                    <action selector="didClickTipJar:" target="XfG-lQ-9wD" id="rRM-fh-snU"/>
+                                </connections>
+                            </button>
                         </subviews>
                         <constraints>
+                            <constraint firstAttribute="bottom" secondItem="w6a-5H-whc" secondAttribute="bottom" constant="8" id="2Rq-wA-upu"/>
+                            <constraint firstAttribute="trailing" secondItem="w6a-5H-whc" secondAttribute="trailing" constant="8" id="7BX-kc-waB"/>
                             <constraint firstItem="rFX-Nx-Jf0" firstAttribute="leading" secondItem="m2S-Jp-Qdl" secondAttribute="leading" constant="20" symbolic="YES" id="ChF-dv-DT5"/>
                             <constraint firstAttribute="trailing" secondItem="rFX-Nx-Jf0" secondAttribute="trailing" constant="20" symbolic="YES" id="PDe-xh-P77"/>
                             <constraint firstItem="rFX-Nx-Jf0" firstAttribute="top" secondItem="m2S-Jp-Qdl" secondAttribute="top" constant="20" symbolic="YES" id="auH-Oj-8Ss"/>
@@ -328,4 +340,7 @@
             <point key="canvasLocation" x="-108" y="730"/>
         </scene>
     </scenes>
+    <resources>
+        <image name="cup.and.heat.waves.fill" catalog="system" width="17" height="16"/>
+    </resources>
 </document>

@@ -96,6 +96,12 @@ class ViewController: NSViewController {
         }
     }
     
+    @IBAction func didClickTipJar(_: NSButton?) {
+        if let url = URL(string: "http://buymeacoffee.com/archagon") {
+            NSWorkspace.shared.open(url)
+        }
+    }
+    
     func refreshView() {
         #if DEBUG
         self.listButton.isHidden = false
