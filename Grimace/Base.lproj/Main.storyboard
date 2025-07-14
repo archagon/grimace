@@ -115,6 +115,9 @@
                                                 <pathCell key="cell" selectable="YES" editable="YES" alignment="left" placeholderString="" id="Ygg-it-uNI">
                                                     <font key="font" metaFont="system"/>
                                                     <url key="url" string="file:///"/>
+                                                    <allowedTypes>
+                                                        <string>public.folder</string>
+                                                    </allowedTypes>
                                                 </pathCell>
                                                 <connections>
                                                     <action selector="didPickDirectory:" target="XfG-lQ-9wD" id="uZo-gp-na7"/>
