@@ -22,7 +22,7 @@ extern const NSString *kAttributeUserTags;
 
 + (NSData *)folderIconAttributeWithSymbolName:(NSString *)symbolName;
 + (NSData *)folderIconAttributeWithText:(NSString *)text;
-+ (nullable NSData *)finderInfoAttributeToShowIconWithExistingFinderInfoAttribute:(NSData *)attribute error:(NSError **)outError;
++ (nullable NSData *)finderInfoAttributeFromExistingAttribute:(NSData *)attribute withCustomIconEnabled:(BOOL)customIcon error:(NSError **)outError;
 
 @end
 

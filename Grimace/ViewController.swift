@@ -34,13 +34,11 @@ class ViewController: NSViewController {
         self.view.window?.isMovableByWindowBackground = true
     }
     
-    func tryWithError(_ block:() throws -> (), ignoreBlock: ((_ error: Error)->Bool)? = nil) {
+    func tryWithError(_ block:() throws -> ()) {
         do {
             try block()
         } catch {
-            if ignoreBlock == nil || ignoreBlock!(error) == false {
-                NSAlert(error: error).runModal()
-            }
+            NSAlert(error: error).runModal()
         }
     }
     
@@ -52,25 +50,28 @@ class ViewController: NSViewController {
         if let directory = self.selectedDirectory {
             tryWithError {
                 let attributes = try Attributes.attributes(for: directory)
-                for attribute in attributes {
-                    let data = try Attributes.data(forAttribute: attribute, for: directory)
-                    var dataDescription = NSString.init(data: data, encoding: NSUTF8StringEncoding) ?? ""
-                    if dataDescription.length == 0 || dataDescription.character(at: 0) == 0 {
-                        dataDescription = ((data as NSData).debugDescription as NSString)
-                    }
-                    
-                    print("Data for \(attribute): \(dataDescription)")
-                    
+                
+                if attributes.isEmpty {
                     let alert = NSAlert()
-                    alert.messageText = "\(attribute)"
-                    alert.informativeText = "\(dataDescription)"
+                    alert.messageText = "No attributes present"
                     alert.runModal()
-                }
-            } ignoreBlock: { error in
-                if (error as NSError).domain == NSPOSIXErrorDomain && (error as NSError).code == ENOATTR {
-                    return true
                 } else {
-                    return false
+                    for attribute in attributes {
+                        try Attributes.ignoringNoAttr {
+                            let data = try Attributes.data(forAttribute: attribute, for: directory)
+                            var dataDescription = NSString.init(data: data, encoding: NSUTF8StringEncoding) ?? ""
+                            if dataDescription.length == 0 || dataDescription.character(at: 0) == 0 {
+                                dataDescription = ((data as NSData).debugDescription as NSString)
+                            }
+                            
+                            print("Data for \(attribute): \(dataDescription)")
+                            
+                            let alert = NSAlert()
+                            alert.messageText = "\(attribute)"
+                            alert.informativeText = "\(dataDescription)"
+                            alert.runModal()
+                        }
+                    }
                 }
             }
         }

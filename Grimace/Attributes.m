@@ -19,7 +19,7 @@ static inline void _ABDeferCallback(ABDeferBlock *block) { (*block)(); }
 
 /// Just a simple retry in rare case that xattrs change out from under us as we try to read them, since we call the functions twice.
 /// An alternative is to initialize our buffers with a max size, but I'm not sure what that would be (and don't care to find out).
-const int kRetryCount = 5;
+static const int kRetryCount = 5;
 
 const NSString *kAttributeFolderIcon = @"com.apple.icon.folder#S";
 const NSString *kAttributeFinderInfo = @"com.apple.FinderInfo";
@@ -206,7 +206,8 @@ static NSString *kAttributeFolderIconEmojiFormat = @"{\"emoji\":\"%@\"}";
     return [[NSString stringWithFormat:kAttributeFolderIconEmojiFormat, text] dataUsingEncoding:NSUTF8StringEncoding];
 }
 
-+ (NSData *)finderInfoAttributeToShowIconWithExistingFinderInfoAttribute:(NSData *)attribute error:(NSError **)outError {
++ (NSData *)finderInfoAttributeFromExistingAttribute:(NSData *)attribute withCustomIconEnabled:(BOOL)customIcon error:(NSError **)outError {
+    /// Not sure if this invariant always holds. I suppose I'll fix it if it comes up.
     if (attribute.length != 32) {
         if (outError != NULL) {
             *outError = [self errorWithErrno:EINVAL];
@@ -214,9 +215,22 @@ static NSString *kAttributeFolderIconEmojiFormat = @"{\"emoji\":\"%@\"}";
         return nil;
     }
     
-    uint8_t expectedByte = 4; // found through trial & error; not sure if it should be a bit flip instead
+    /// AKA `kHasCustomIcon`. Discovered through trial & error.
+    const uint8_t expectedBit = 4;
+    const NSRange expectedRange = NSMakeRange(8, 1);
+    
+    uint8_t existingByte = 0;
+    [attribute getBytes:&existingByte range:expectedRange];
+    
+    uint8_t newByte = existingByte;
+    if (customIcon) {
+        newByte |= expectedBit;
+    } else {
+        newByte &= (~expectedBit);
+    }
+    
     NSMutableData *returnValue = [attribute mutableCopy];
-    [returnValue replaceBytesInRange:NSMakeRange(8, 1) withBytes:&expectedByte];
+    [returnValue replaceBytesInRange:expectedRange withBytes:&newByte];
     
     return returnValue;
 }
