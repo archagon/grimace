@@ -17,6 +17,10 @@ static inline void _ABDeferCallback(ABDeferBlock *block) { (*block)(); }
 
 @implementation Attributes
 
+/// Just a simple retry in rare case that xattrs change out from under us as we try to read them, since we call the functions twice.
+/// An alternative is to initialize our buffers with a max size, but I'm not sure what that would be (and don't care to find out).
+const int kRetryCount = 5;
+
 const NSString *kAttributeFolderIcon = @"com.apple.icon.folder#S";
 const NSString *kAttributeFinderInfo = @"com.apple.FinderInfo";
 const NSString *kAttributeUserTags = @"com.apple.metadata:_kMDItemUserTags";
@@ -26,11 +30,22 @@ static NSString *kAttributeFolderIconEmojiFormat = @"{\"emoji\":\"%@\"}";
 
 + (NSArray<NSString *> *)attributesForURL:(NSURL *)url error:(NSError **)outError {
     int returnError = 0;
-    __auto_type returnValue = [self _attributesForURL:url error:&returnError];
+    NSArray<NSString *> *returnValue = nil;
+    
+    for (int i = 0; i < kRetryCount; i++) {
+        returnValue = [self _attributesForURL:url error:&returnError];
+        
+        if (returnValue == nil && returnError == EAGAIN) {
+            continue;
+        } else {
+            break;
+        }
+    }
     
     if (returnError != 0 && outError != NULL) {
         *outError = [self errorWithErrno:returnError];
     }
+    
     return returnValue;
 }
 /// Populates `error` with 0 on success and a POSIX error code on error. Returns `EAGAIN` on atomic failure.
@@ -95,11 +110,22 @@ static NSString *kAttributeFolderIconEmojiFormat = @"{\"emoji\":\"%@\"}";
 
 + (NSData *)dataForAttribute:(NSString *)attribute forURL:(NSURL *)url error:(NSError **)outError {
     int returnError = 0;
-    __auto_type returnValue = [self _dataForAttribute:attribute forURL:url error:&returnError];
+    NSData *returnValue = nil;
+    
+    for (int i = 0; i < kRetryCount; i++) {
+        returnValue = [self _dataForAttribute:attribute forURL:url error:&returnError];
+        
+        if (returnValue == nil && returnError == EAGAIN) {
+            continue;
+        } else {
+            break;
+        }
+    }
     
     if (returnError != 0 && outError != NULL) {
         *outError = [self errorWithErrno:returnError];
     }
+    
     return returnValue;
 }
 /// Populates `error` with 0 on success and a POSIX error code on error. Returns `EAGAIN` on atomic failure.
