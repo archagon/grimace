@@ -1,18 +1,22 @@
 {
   "fill" : {
-    "automatic-gradient" : "extended-srgb:0.00000,0.53333,1.00000,1.00000"
+    "solid" : "srgb:1.00000,0.41745,0.16653,1.00000"
   },
   "groups" : [
     {
+      "blend-mode" : "normal",
+      "blur-material" : null,
+      "hidden" : false,
       "layers" : [
         {
-          "blend-mode" : "plus-darker",
+          "blend-mode" : "normal",
           "fill" : {
-            "automatic-gradient" : "srgb:0.70453,0.56548,0.14895,1.00000"
+            "solid" : "srgb:0.73383,0.22547,0.00000,1.00000"
           },
-          "glass" : false,
+          "glass" : true,
           "image-name" : "theatermask.and.paintbrush-brown2.png",
-          "name" : "theatermask.and.paintbrush-brown2",
+          "name" : "Mask",
+          "opacity" : 1,
           "position" : {
             "scale" : 0.48,
             "translation-in-points" : [
@@ -20,7 +24,22 @@
               40
             ]
           }
-        },
+        }
+      ],
+      "lighting" : "individual",
+      "shadow" : {
+        "kind" : "neutral",
+        "opacity" : 0.5
+      },
+      "specular" : false,
+      "translucency" : {
+        "enabled" : true,
+        "value" : 0.5
+      }
+    },
+    {
+      "blur-material" : null,
+      "layers" : [
         {
           "blend-mode" : "normal",
           "fill" : {
@@ -39,20 +58,28 @@
           }
         }
       ],
+      "lighting" : "combined",
+      "position" : {
+        "scale" : 1,
+        "translation-in-points" : [
+          0,
+          0
+        ]
+      },
       "shadow" : {
         "kind" : "neutral",
-        "opacity" : 0.5
+        "opacity" : 1
       },
+      "specular" : true,
       "translucency" : {
-        "enabled" : true,
+        "enabled" : false,
         "value" : 0.5
       }
     }
   ],
   "supported-platforms" : {
-    "circles" : [
-      "watchOS"
-    ],
-    "squares" : "shared"
+    "squares" : [
+      "macOS"
+    ]
   }
 }
