@@ -8,4 +8,4 @@ For a list of private SF Symbols you can use, Quentin Fasquel built a really nic
 
 Enjoy!
 
-<img src="Screenshot.png" />
+![Screenshot](Screenshot.png)
