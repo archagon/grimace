@@ -1,4 +1,4 @@
-# <img align=top src="Icon.png" width=40pt> Grimace
+# <img align=top src="Images/Icon.png" width=40pt> Grimace
 
 In macOS Tahoe, you can now customize directories to display an SF Symbol or emoji. Using a shell invocation, this can be extended to private SF Symbols and arbitrary text strings: <https://mjtsai.com/blog/2025/07/11/macos-tahoes-folder-icon-customization>
 
@@ -8,4 +8,6 @@ For a list of private SF Symbols you can use, Quentin Fasquel built a really nic
 
 Enjoy!
 
-![](Screenshot.png)
+![](Images/ScreenshotApp.png)
+
+![](Images/ScreenshotFinder.png)
