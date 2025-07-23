@@ -11,11 +11,28 @@ internal import UniformTypeIdentifiers
 class ViewController: NSViewController {
 
     @IBOutlet var pathControl: NSPathControl!
-    @IBOutlet var textField: NSTextField!
+    @IBOutlet var textField: NSTextField?
+    @IBOutlet var comboBox: NSComboBox!
     @IBOutlet var picker: NSPopUpButton!
     @IBOutlet var listButton: NSButton!
     @IBOutlet var applyButton: NSButton!
     @IBOutlet var clearButton: NSButton!
+    
+    var privateSymbols: [String] = {
+        var symbols: [String] = []
+        
+        let url = URL(fileURLWithPath: "/System/Library/PrivateFrameworks/SFSymbols.framework/Versions/A/Resources/CoreGlyphsPrivate.bundle/Contents/Resources/symbol_order.plist")
+        
+        if FileManager.default.fileExists(atPath: url.path()) {
+            if let data = try? Data.init(contentsOf: url) {
+                if let plist = try? PropertyListSerialization.propertyList(from: data, format: nil) as? [String] {
+                    symbols = plist
+                }
+            }
+        }
+        
+        return symbols
+    }()
     
     var selectedDirectory: URL? {
         return self.pathControl.url
@@ -24,7 +41,7 @@ class ViewController: NSViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        self.textField.stringValue = "hand.side.pinch"
+        self.textField?.stringValue = "hand.side.pinch"
         self.refreshView()
     }
     
@@ -80,10 +97,12 @@ class ViewController: NSViewController {
     @IBAction func didClickApply(_: NSButton?) {
         if let directory = self.selectedDirectory {
             tryWithError {
-                if self.picker.selectedTag() == 1 {
-                    try Attributes.setSymbolIcon(with: self.textField.stringValue, for: directory)
-                } else if self.picker.selectedTag() == 2 {
-                    try Attributes.setTextIcon(with: self.textField.stringValue, for: directory)
+                if let stringValue = self.textField?.stringValue {
+                    if self.picker.selectedTag() == 1 {
+                        try Attributes.setSymbolIcon(with: stringValue, for: directory)
+                    } else if self.picker.selectedTag() == 2 {
+                        try Attributes.setTextIcon(with: stringValue, for: directory)
+                    }
                 }
             }
         }
