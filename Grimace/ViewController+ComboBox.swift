@@ -36,6 +36,11 @@ extension ViewController : NSComboBoxDataSource, NSComboBoxDelegate {
             fullString.append(NSAttributedString(string: "\t"))
             fullString.append(NSAttributedString(string: symbol))
             
+            let paragraphStyle = NSMutableParagraphStyle()
+            paragraphStyle.lineBreakMode = .byTruncatingMiddle
+            let range = NSRange(location: 0, length: fullString.mutableString.length)
+            fullString.addAttribute(.paragraphStyle, value: paragraphStyle, range: range)
+            
             return fullString
         } else {
             return "\(symbol)"
