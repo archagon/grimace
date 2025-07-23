@@ -33,6 +33,7 @@ class ViewController: NSViewController {
         
         return symbols
     }()
+    var comboBoxContents: [String] = []
     
     var selectedDirectory: URL? {
         return self.pathControl.url
@@ -41,6 +42,7 @@ class ViewController: NSViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        self.comboBoxContents = self.privateSymbols
         self.textField?.stringValue = "hand.side.pinch"
         self.refreshView()
     }
