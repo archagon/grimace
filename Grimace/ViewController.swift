@@ -18,21 +18,36 @@ class ViewController: NSViewController {
     @IBOutlet var applyButton: NSButton!
     @IBOutlet var clearButton: NSButton!
     
-    var privateSymbols: [String] = {
-        var symbols: [String] = []
-        
-        let url = URL(fileURLWithPath: "/System/Library/PrivateFrameworks/SFSymbols.framework/Versions/A/Resources/CoreGlyphsPrivate.bundle/Contents/Resources/symbol_order.plist")
-        
-        if FileManager.default.fileExists(atPath: url.path()) {
-            if let data = try? Data.init(contentsOf: url) {
-                if let plist = try? PropertyListSerialization.propertyList(from: data, format: nil) as? [String] {
-                    symbols = plist
-                }
-            }
+    let publicSymbols: [String] = {
+        if
+            let framework = Bundle(identifier: "com.apple.SFSymbolsFramework"),
+            let bundlePath = framework.path(forResource: "CoreGlyphs", ofType: "bundle"),
+            let bundle = Bundle(path: bundlePath),
+            let resourcePath = bundle.url(forResource: "symbol_order", withExtension: "plist"),
+            let data = try? Data(contentsOf: resourcePath),
+            let plist = try? PropertyListSerialization.propertyList(from: data, format: nil) as? [String]
+        {
+            return plist
+        } else {
+            return []
         }
-        
-        return symbols
     }()
+    
+    var privateSymbols: [String] = {
+        if
+            let framework = Bundle(identifier: "com.apple.SFSymbolsFramework"),
+            let bundlePath = framework.path(forResource: "CoreGlyphsPrivate", ofType: "bundle"),
+            let bundle = Bundle(path: bundlePath),
+            let resourcePath = bundle.url(forResource: "symbol_order", withExtension: "plist"),
+            let data = try? Data(contentsOf: resourcePath),
+            let plist = try? PropertyListSerialization.propertyList(from: data, format: nil) as? [String]
+        {
+            return plist
+        } else {
+            return []
+        }
+    }()
+    
     var comboBoxContents: [String] = []
     
     var selectedDirectory: URL? {
@@ -42,7 +57,7 @@ class ViewController: NSViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        self.comboBoxContents = self.privateSymbols
+        self.comboBoxContents = self.publicSymbols + self.privateSymbols
         self.textField?.stringValue = "hand.side.pinch"
         self.refreshView()
     }

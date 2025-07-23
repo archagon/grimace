@@ -60,7 +60,8 @@ extension ViewController : NSComboBoxDataSource, NSComboBoxDelegate {
             let regex = try Regex(regexString)
             print(regex)
             
-            self.comboBoxContents = try self.privateSymbols.filter { symbol in
+            let allSymbols = self.publicSymbols + self.privateSymbols
+            self.comboBoxContents = try allSymbols.filter { symbol in
                 try regex.wholeMatch(in: symbol) != nil
             }
             self.comboBox.reloadData()
